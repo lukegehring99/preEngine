@@ -48,8 +48,14 @@ hs_err_pid*
 PreEngine/.classpath
 *.project
 .metadata/.plugins/org.eclipse.jdt.core/nonChainingJarsCache
+<<<<<<< HEAD
 .metadata/.plugins/org.eclipse.jdt.core/indexNamesMap.txt
 .metadata/.plugins/org.eclipse.jdt.core/assumedExternalFilesCache
 .metadata/.plugins/org.eclipse.epp.logging.aeri.ide/org.eclipse.epp.logging.aeri.ide.server/http-cache/segments_1
 .metadata/.plugins/org.eclipse.jdt.core/externalFilesCache
 .metadata/.plugins/org.eclipse.epp.logging.aeri.ide/org.eclipse.epp.logging.aeri.ide.server/remote-history/segments_1
+=======
+.metadata/.plugins/org.eclipse.jdt.core/externalFilesCache
+.metadata/.plugins/org.eclipse.jdt.core/assumedExternalFilesCache
+*.history
+>>>>>>> origin/master
