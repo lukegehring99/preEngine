@@ -47,3 +47,7 @@ hs_err_pid*
 *.ini
 PreEngine/.classpath
 *.project
+.metadata/.plugins/org.eclipse.jdt.core/nonChainingJarsCache
+.metadata/.plugins/org.eclipse.jdt.core/externalFilesCache
+.metadata/.plugins/org.eclipse.jdt.core/assumedExternalFilesCache
+*.history
