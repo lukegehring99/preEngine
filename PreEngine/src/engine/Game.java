@@ -34,5 +34,12 @@ public class Game {
 		}
 		
 	}
+	
+	public void addToGameField(GameField field)
+	{
+		field.add(this);
+	}
+	
+	
 
 }

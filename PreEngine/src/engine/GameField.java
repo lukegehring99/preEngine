@@ -6,4 +6,11 @@ package engine;
 
 public class GameField {
 
+	
+	
+	
+	public void add(Game game)
+	{
+		
+	}
 }
