@@ -59,3 +59,4 @@ PreEngine/.classpath
 .metadata/.plugins/org.eclipse.jdt.core/assumedExternalFilesCache
 *.history
 >>>>>>> origin/master
+*.png
