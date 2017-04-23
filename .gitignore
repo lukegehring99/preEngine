@@ -62,3 +62,4 @@ PreEngine/.classpath
 *.png
 .metadata/.plugins/org.eclipse.epp.logging.aeri.ide/org.eclipse.epp.logging.aeri.ide.server/remote-history/segments_3
 .recommenders/index/http___download_eclipse_org_recommenders_models_neon_/segments_1
+.recommenders/index/http___download_eclipse_org_recommenders_models_neon_/segments_2

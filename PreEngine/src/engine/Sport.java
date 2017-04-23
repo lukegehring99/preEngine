@@ -29,7 +29,7 @@ public class Sport {
 		gameFields.add(new GameField());
 		rosters.add(new Roster());
 		
-		addValue(indexes, id);
+		addValue(indexes, this.id);
 	}
 	
 	
@@ -99,5 +99,27 @@ public class Sport {
 		
 		newArray[length] = addedValue;
 		return newArray;
+	}
+	
+	
+	/**
+	 * Getter for name of the sport
+	 * 
+	 * @return name of Sport as a String
+	 */
+	public String getName()
+	{
+		return name;
+	}
+	
+	
+	/**
+	 * Setter for the name of the sport
+	 * 
+	 * @param newName of the Sport
+	 */
+	public void setName(String newName)
+	{
+		name = newName;
 	}
 }
