@@ -63,22 +63,12 @@ public class Game {
 	
 	
 	/**
-	 * Adds this Game to the GameField for the respective sport.
-	 * 
-	 * @param sport the game is to be added to
-	 */
-	public void addToGameField(Sport sport)
-	{
-		sport.addToGameField(this);
-	}
-
-
-	/**
 	 * Getter for Team1Score
 	 * 
 	 * @return team1Score
 	 */
-	public double getTeam1Score() {
+	public double getTeam1Score() 
+	{
 		return team1Score;
 	}
 
@@ -88,7 +78,8 @@ public class Game {
 	 * 
 	 * @param team1Score replacement
 	 */
-	public void setTeam1Score(double team1Score) {
+	public void setTeam1Score(double team1Score) 
+	{
 		this.team1Score = team1Score;
 	}
 
@@ -98,7 +89,8 @@ public class Game {
 	 * 
 	 * @return team2Score
 	 */
-	public double getTeam2Score() {
+	public double getTeam2Score() 
+	{
 		return team2Score;
 	}
 
@@ -108,12 +100,9 @@ public class Game {
 	 * 
 	 * @param team2Score replacement
 	 */
-	public void setTeam2Score(double team2Score) {
+	public void setTeam2Score(double team2Score) 
+	{
 		this.team2Score = team2Score;
 	}
 	
-	
-	
-	
-
 }
