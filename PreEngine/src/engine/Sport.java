@@ -29,7 +29,7 @@ public class Sport {
 		gameFields.add(new GameField());
 		rosters.add(new Roster());
 		
-		addValue(indexes, this.id);
+		indexes = addValue(indexes, this.id);
 	}
 	
 	
