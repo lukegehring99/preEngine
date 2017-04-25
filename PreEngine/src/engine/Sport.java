@@ -122,4 +122,17 @@ public class Sport {
 	{
 		name = newName;
 	}
+	
+	
+	public Roster getRoster(int idSport)
+	{
+		return rosters.get(getIndex(idSport));
+	}
+	
+	
+	public GameField getGameField(int idSport)
+	{
+		return gameFields.get(getIndex(idSport));
+	}
 }
+
