@@ -21,4 +21,9 @@ public class GameField {
 	{
 		
 	}
+	
+	public ArrayList<Team> getAllGamesPlayed(Team team)
+	{
+		return new ArrayList<Team>();
+	}
 }

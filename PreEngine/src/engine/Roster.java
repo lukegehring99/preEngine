@@ -8,9 +8,14 @@ public class Roster
 {
 	private ArrayList<Team> teams = new ArrayList<Team>();
 	
+	
+	
 	public void add(Team team)
 	{
-		
+		teams.add(team);
 	}
+	
+	
+	
 	
 }
