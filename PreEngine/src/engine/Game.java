@@ -105,4 +105,16 @@ public class Game {
 		this.team2Score = team2Score;
 	}
 	
+	
+	public boolean hasTeam(Team other)
+	{
+		boolean value = false;
+		
+		if(team1.equals(other) || team2.equals(other))
+		{
+			value = true;
+		}
+		
+		return value;
+	}
 }

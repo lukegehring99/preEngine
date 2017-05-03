@@ -15,6 +15,10 @@ public class Roster
 		teams.add(team);
 	}
 	
+	public boolean hasGame(Team team1, Team team2)
+	{
+		return false;
+	}
 	
 	
 	

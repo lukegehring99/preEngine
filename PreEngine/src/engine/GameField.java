@@ -22,8 +22,28 @@ public class GameField {
 		
 	}
 	
-	public ArrayList<Team> getAllGamesPlayed(Team team)
+	public ArrayList<Game> getAllGamesPlayed(Team team)
 	{
-		return new ArrayList<Team>();
+		
+		ArrayList<Game> temp = new ArrayList<Game>();
+		
+		for(Game game : games)
+		{
+			if (game.hasTeam(team))
+			{
+				temp.add(game);
+			}
+		}
+		
+		
+		return temp;
 	}
+	
+	public boolean hasGame()
+	{
+		
+		return false;
+	}
+	
+	
 }
