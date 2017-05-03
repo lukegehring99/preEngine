@@ -9,8 +9,8 @@ public class Test {
 		
 		Sport s = new Sport(1, "ball");
 
-		Team a = new Team(3, "A");
-		Team b = new Team(4, "B");
+		Team a = new Team("A");
+		Team b = new Team("B");
 		
 		int scoreA = 63;
 		int scoreB = 56;

@@ -4,7 +4,7 @@ public class Team {
 	
 	private int id;        // Unique id representing the team
 	private String name;   // Name of the team
-	
+	private static int nextID = 0;
 	
 	/**
 	 * Team Constructor
@@ -13,10 +13,11 @@ public class Team {
 	 * @param id of the team
 	 * @param name of the team
 	 */
-	public Team(int id, String name)
+	public Team(String name)
 	{
-		this.id = id;
+		this.id = nextID;
 		this.name = name;
+		nextID++;
 	}
 
 	
@@ -44,6 +45,19 @@ public class Team {
 	public void setName(String newName)
 	{
 		name = newName;
+	}
+	
+	
+	public boolean equals(Team other)
+	{
+		boolean value = false;
+		
+		if (this.id == other.id)
+		{
+			value = true;
+		}
+		
+		return value;
 	}
 	
 	
