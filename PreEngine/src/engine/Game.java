@@ -117,4 +117,11 @@ public class Game {
 		
 		return value;
 	}
+	
+	public String toString()
+	{
+		String game = team1.getName() + " - " + team2.getName() + " : " + team1Score + " - " + team2Score;
+		
+		return game;
+	}
 }

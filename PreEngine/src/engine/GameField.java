@@ -82,4 +82,18 @@ public class GameField {
 		return result;
 	}
 	
+	public String toString()
+	{
+		String gamesPlayed = "";
+		
+		for(Game game : games)
+		{
+			gamesPlayed += "[" + game.toString() + "] ";
+		}
+		
+		
+		return gamesPlayed;
+	}
+	
+	
 }

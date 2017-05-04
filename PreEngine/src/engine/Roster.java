@@ -40,6 +40,21 @@ public class Roster
 		
 	}
 	
+	public String toString()
+	{
+		String teamNames = "[Team Number : Team Name : ID] ";
+		int number = 1;
+		
+		
+		for(Team team : teams)
+		{
+ 			teamNames += "[" + number + " : " + team.getName() +  " : " + team.getId() + "] ";
+			number++;
+		}
+		
+		return teamNames;
+	}
+	
 	
 	
 }
