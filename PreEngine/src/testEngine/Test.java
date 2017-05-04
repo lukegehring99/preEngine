@@ -7,7 +7,7 @@ public class Test {
 		System.out.println("Test module");
 		
 		
-		Sport s = new Sport(1, "ball");
+		Sport s = new Sport("ball");
 
 		Team a = new Team("A");
 		Team b = new Team("B");
@@ -19,8 +19,8 @@ public class Test {
 		
 //		System.out.println(s.getIndex(1));
 		
-		s.addGame(g, 1);
-		s.addTeam(a, 1);
+		s.addGame(g);
+		s.addTeam(a);
 	}
 
 }
