@@ -10,6 +10,11 @@ public class GameField {
 
 	private ArrayList<Game> games = new ArrayList<Game>();
 	
+	public GameField()
+	{
+		
+	}
+	
 	
 	public void add(Game game)
 	{

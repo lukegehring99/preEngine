@@ -1,6 +1,5 @@
 package engine;
 
-import java.util.ArrayList;
 
 
 public class Sport {
@@ -8,6 +7,7 @@ public class Sport {
 	private GameField games;     // Container for the GameField
 	private Roster teams;        // Container for the Roster
 	
+	@SuppressWarnings("unused")
 	private int id;                                 // Unique Id representing the sport
 	private String name;                            // Official name of the sport
 	
@@ -26,6 +26,9 @@ public class Sport {
 		this.id = nextID;
 		nextID++;
 		this.name = name;	
+		
+		games = new GameField();
+		teams = new Roster();
 	}
 	
 	
