@@ -10,7 +10,7 @@ public class Pathway {
 	private GameField games;
 	private Roster allTeams;
 	
-	private double results[] = new double[0];
+	private double[] results;
 	
 	public Pathway(Team team1, Team team2, int level, GameField games, Roster allTeams)
 	{
@@ -23,9 +23,13 @@ public class Pathway {
 	}
 	
 	
-	public double[] generatePathway(GameField games, Roster availableTeams, int level)
+	public double[] generatePathway()
 	{
-		return new double[0];
+		results = new double[0];
+		
+		nextLevel(startTeam, endTeam, games, allTeams, level, 0.0);
+		
+		return results;
 	}
 	
 	
