@@ -12,13 +12,13 @@ public class Pathway {
 	
 	private double[] results;
 	
-	public Pathway(Team team1, Team team2, int level, GameField games, Roster allTeams)
+	public Pathway(Team team1, Team team2, int level, Sport sport)
 	{
 		startTeam = team1;
 		endTeam = team2;
 		
-		this.allTeams = allTeams;
-		this.games = games;
+		allTeams = sport.getRoster();
+		games = sport.getGameField();
 		this.level = level;
 	}
 	
@@ -26,6 +26,10 @@ public class Pathway {
 	public double[] generatePathway()
 	{
 		results = new double[0];
+		
+		allTeams = allTeams.copyBut(startTeam);
+		allTeams = allTeams.copyBut(endTeam);
+		
 		
 		nextLevel(startTeam, endTeam, games, allTeams, level, 0.0);
 		
@@ -41,6 +45,10 @@ public class Pathway {
 		    {
 				results = append(results, score + games.getGameDifference(team1, team2));
 		    }
+			else
+			{
+				System.out.println("Nope");
+			}
 		}
 		else
 		{

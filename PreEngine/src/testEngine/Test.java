@@ -4,7 +4,7 @@ import engine.*;
 public class Test {
 
 	public static void main(String[] args) {
-		System.out.println("Test module");
+//		System.out.println("Test module");
 		
 		Sport s = new Sport("ball");
 
@@ -23,7 +23,7 @@ public class Test {
 		Team e = new Team("E");
 		s.addTeam(e);
 		
-		System.out.println(s.getRoster());
+//		System.out.println(s.getRoster());
 
 		Game game0 = new Game(a, 21, b, 20);
 		s.addGame(game0);
@@ -46,8 +46,30 @@ public class Test {
 		Game game6 = new Game(e, 16, c, 19);
 		s.addGame(game6);
 		
+		Pathway path0lvl = new Pathway(a, b, 0, s); 
+		printArray(path0lvl.generatePathway());
 		
-		System.out.println(s.getGameField());
+		Pathway path1lvl = new Pathway(a, c, 2, s);
+		printArray(path1lvl.generatePathway());
+		
 	}
 
+	public static void printArray(double[] array)
+	{
+		System.out.print("[");
+		for(int i = 0; i < array.length; i++)
+		{
+			if(!(i == array.length-1))
+			{
+				System.out.print(array[i] + ", ");
+			}
+			else
+			{
+				System.out.print(array[i]);
+			}
+		}
+		System.out.println("]");
+	}
+	
+	
 }

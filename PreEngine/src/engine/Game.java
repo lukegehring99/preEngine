@@ -46,11 +46,11 @@ public class Game {
 	 */
 	@SuppressWarnings("null")
 	public double getDifference(Team comparingTeam){
-		if (team1 == comparingTeam)
+		if (team2 == comparingTeam)
 		{
 			return team2Score - team1Score;
 		}
-		else if(team2 == comparingTeam)
+		else if(team1 == comparingTeam)
 		{
 			return team1Score - team2Score;
 		}

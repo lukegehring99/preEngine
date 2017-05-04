@@ -41,7 +41,6 @@ public class GameField {
 			}
 		}
 		
-		
 		return temp;
 	}
 	
@@ -66,8 +65,7 @@ public class GameField {
 	
 	public double getGameDifference(Team team1, Team team2)
 	{
-		@SuppressWarnings("null")
-		double result = (Double) null;
+		double result = 0;
 		
 		ArrayList<Game> possible = getAllGamesPlayed(team1);
 		
