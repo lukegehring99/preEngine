@@ -35,12 +35,37 @@ public class Pathway {
 	
 	private void nextLevel(Team team1, Team team2, GameField games, Roster avaibleTeams, int level, double score)
 	{
-		
+		if(level == 0)
+		{
+			if(games.hasGame(team1, team2))
+		    {
+				results = append(results, score + games.getGameDifference(team1, team2));
+		    }
+		}
+		else
+		{
+	    	level--;
+	    	for(Team team : avaibleTeams.getTeams())
+	    	{
+		    	double newScore = score + games.getGameDifference(team1, team);
+		    	Roster newRoster = avaibleTeams.copyBut(team);
+		    	nextLevel(team, team2, games, newRoster, level, newScore);
+		    }
+		}
 	}
 	
-	private double[] append(double[] old)
+	private double[] append(double[] old, double addedValue)
 	{
-		return new double[0];
+		int length = old.length;
+		double[] newArray = new double[length + 1];
+		
+		for(int i = 0; i < length; i++)
+		{
+			newArray[i] = old[i];
+		}
+		
+		newArray[length] = addedValue;
+		return newArray;
 	}
 	
 }
