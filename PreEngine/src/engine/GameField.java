@@ -22,7 +22,8 @@ public class GameField {
 		
 	}
 	
-	public ArrayList<Game> getAllGamesPlayed(Team team)
+	
+	private ArrayList<Game> getAllGamesPlayed(Team team)
 	{
 		
 		ArrayList<Game> temp = new ArrayList<Game>();
@@ -39,10 +40,22 @@ public class GameField {
 		return temp;
 	}
 	
-	public boolean hasGame()
+	public boolean hasGame(Team team1, Team team2)
 	{
+		boolean result = false;
 		
-		return false;
+		ArrayList<Game> possible = getAllGamesPlayed(team1);
+		
+		for(Game game : possible)
+		{
+			if(game.hasTeam(team2))
+			{
+				result = true;
+			}
+		}
+		
+		
+		return result;
 	}
 	
 	
