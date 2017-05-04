@@ -15,9 +15,26 @@ public class Roster
 		teams.add(team);
 	}
 	
-	public boolean hasGame(Team team1, Team team2)
+	public ArrayList<Team> getTeams()
 	{
-		return false;
+		return teams;
+	}
+	
+	
+	public Roster copyBut(Team team1)
+	{	
+		Roster newRoster = new Roster();
+		
+		for(Team team : teams)
+		{
+			if(!(team.equals(team1)))
+			{
+				newRoster.add(team);
+			}
+		}
+		
+		return newRoster;
+		
 	}
 	
 	

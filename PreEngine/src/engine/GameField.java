@@ -59,4 +59,22 @@ public class GameField {
 	}
 	
 	
+	public double getGameDifference(Team team1, Team team2)
+	{
+		@SuppressWarnings("null")
+		double result = (Double) null;
+		
+		ArrayList<Game> possible = getAllGamesPlayed(team1);
+		
+		for(Game game : possible)
+		{
+			if(game.hasTeam(team2))
+			{
+				result = game.getDifference(team2);
+			}
+		}
+		
+		return result;
+	}
+	
 }
