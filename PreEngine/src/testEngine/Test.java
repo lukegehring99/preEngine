@@ -46,11 +46,21 @@ public class Test {
 		Game game6 = new Game(e, 16, c, 19);
 		s.addGame(game6);
 		
-		Pathway path0lvl = new Pathway(a, b, 0, s); 
+		/*
+		Pathway path0lvl = new Pathway(a, c, 1, s); 
 		printArray(path0lvl.generatePathway());
 		
 		Pathway path1lvl = new Pathway(a, c, 2, s);
 		printArray(path1lvl.generatePathway());
+		*/
+		
+		for(int i = 0; i < 4; i++)
+		{
+			Pathway path = new Pathway(a, b, i, s);
+			printArray(path.generatePathway());
+		}
+		
+		
 		
 	}
 

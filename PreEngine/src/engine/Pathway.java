@@ -43,11 +43,12 @@ public class Pathway {
 		{
 			if(games.hasGame(team1, team2))
 		    {
+//				System.out.println("Game between: " + team1.getName() + " and " + team2.getName());
 				results = append(results, score + games.getGameDifference(team1, team2));
 		    }
 			else
 			{
-				System.out.println("Nope");
+//				System.out.println("No game between: " + team1.getName() + " and " + team2.getName());
 			}
 		}
 		else
@@ -55,9 +56,13 @@ public class Pathway {
 	    	level--;
 	    	for(Team team : avaibleTeams.getTeams())
 	    	{
-		    	double newScore = score + games.getGameDifference(team1, team);
-		    	Roster newRoster = avaibleTeams.copyBut(team);
-		    	nextLevel(team, team2, games, newRoster, level, newScore);
+	    		
+	    		if(games.hasGame(team1, team))
+	    		{
+	    			double newScore = score + games.getGameDifference(team1, team);
+	    			Roster newRoster = avaibleTeams.copyBut(team);
+	    			nextLevel(team, team2, games, newRoster, level, newScore);
+	    		}
 		    }
 		}
 	}
