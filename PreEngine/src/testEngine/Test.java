@@ -56,7 +56,12 @@ public class Test {
 		
 		for(int i = 0; i < 4; i++)
 		{
+			
 			Pathway path = new Pathway(a, b, i, s);
+			System.out.println(System.currentTimeMillis());
+			
+			
+			
 			printArray(path.generatePathway());
 		}
 		
