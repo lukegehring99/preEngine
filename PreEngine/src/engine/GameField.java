@@ -24,33 +24,72 @@ public class GameField {
 	
 	public void mergeRepeatGames()
 	{
-		int[] indexes = new int[0];
+		int[] indexes = new int[0]; //values to remove at end of the array
+		
+		ArrayList<Game> addedGames = new ArrayList<Game>();
 		
 		for(int i = 0; i < games.size() - 1; i++)
 		{
-			for(int k = i + 1; k < games.size(); k++)
+			
+			double scoreA = games.get(i).getTeam1Score();
+			double scoreB = games.get(i).getTeam2Score();
+			int[] temp = new int[1];
+			
+			temp[0] = i;
+			
+			for(int k = i + 1; k < games.size(); k++) // For every game following the previous game
 			{
-				if(games.get(i).hasTeam(games.get(k).getTeam1()) && games.get(i).hasTeam(games.get(k).getTeam2()))
+				if(games.get(i).hasTeam(games.get(k).getTeam1()) && games.get(i).hasTeam(games.get(k).getTeam2())) //If the games are the same
 				{
-					if(isUniqueValue(indexes, i))
-					{
-						indexes = append(indexes, i);
-					}
+						temp = append(temp, k);
+						
+						if(games.get(i).getTeam1().equals(games.get(k).getTeam1()))
+						{
+							scoreA += games.get(k).getTeam1Score();
+							scoreB += games.get(k).getTeam2Score();
+						}
+						else
+						{
+							scoreA += games.get(k).getTeam2Score();
+							scoreB += games.get(k).getTeam1Score();
+						}	
 				}
+			}
+			
+			boolean shouldBeAdded = true;
+			
+			for(Game game : addedGames)
+			{
+				if(game.hasTeam(games.get(i).getTeam1()) && game.hasTeam(games.get(i).getTeam2()))
+				{
+					shouldBeAdded = false;
+				}
+			}
+			
+			if(shouldBeAdded && temp.length > 1)
+			{
+				int numberOfGames = temp.length;
+				addedGames.add(new Game(games.get(i).getTeam1(), scoreA/numberOfGames, games.get(i).getTeam2(), scoreB/numberOfGames));
+				
+				for(int q = 0; q < temp.length; q++)
+				{
+					indexes = append(indexes, temp[q]);
+				}
+				
 			}
 		}
 		
 		
-		int[] temp = new int[0];
-		
-		int toMerge = indexes.length;
-		
-		while(toMerge > 0)
+		for(int i = indexes.length; i > 0; i--)
 		{
-			
+			games.remove(indexes[i - 1]);
 		}
 		
-
+		for(Game add : addedGames)
+		{
+			games.add(add);
+		}
+		
 	}
 	
 	
@@ -135,19 +174,5 @@ public class GameField {
 	}
 	
 	
-	private boolean isUniqueValue(int[] array, int checkValue)
-	{
-		boolean value = true;
-		
-		for(int i = 0; i < array.length; i++)
-		{
-			if(array[i] == checkValue)
-			{
-				value = false;
-			}
-		}
-		
-		return value;
-	}
 	
 }

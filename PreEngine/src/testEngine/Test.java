@@ -17,6 +17,26 @@ public class Test {
 		Team c = new Team("C");
 		s.addTeam(c);
 		
+		Game game0 = new Game(a, 5, b, 6);
+		s.addGame(game0);
+		
+		Game game1 = new Game(a, 4, b, 2);
+		s.addGame(game1);
+		
+		Game game2 = new Game(a, 8, c, 5);
+		s.addGame(game2);
+		
+		Game game3 = new Game(c, 4, a, 2);
+		s.addGame(game3);
+		
+		System.out.println(s.getGameField());
+		
+		s.getGameField().mergeRepeatGames();
+		
+		System.out.println(s.getGameField());
+		
+		
+		/*
 		Team d = new Team("D");
 		s.addTeam(d);
 		
@@ -46,13 +66,13 @@ public class Test {
 		Game game6 = new Game(e, 16, c, 19);
 		s.addGame(game6);
 		
-		/*
+		
 		Pathway path0lvl = new Pathway(a, c, 1, s); 
 		printArray(path0lvl.generatePathway());
 		
 		Pathway path1lvl = new Pathway(a, c, 2, s);
 		printArray(path1lvl.generatePathway());
-		*/
+		
 		
 		for(int i = 0; i < 4; i++)
 		{
@@ -64,7 +84,7 @@ public class Test {
 			
 			printArray(path.generatePathway());
 		}
-		
+		*/
 		
 		
 	}
