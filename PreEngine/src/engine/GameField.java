@@ -24,7 +24,33 @@ public class GameField {
 	
 	public void mergeRepeatGames()
 	{
+		int[] indexes = new int[0];
 		
+		for(int i = 0; i < games.size() - 1; i++)
+		{
+			for(int k = i + 1; k < games.size(); k++)
+			{
+				if(games.get(i).hasTeam(games.get(k).getTeam1()) && games.get(i).hasTeam(games.get(k).getTeam2()))
+				{
+					if(isUniqueValue(indexes, i))
+					{
+						indexes = append(indexes, i);
+					}
+				}
+			}
+		}
+		
+		
+		int[] temp = new int[0];
+		
+		int toMerge = indexes.length;
+		
+		while(toMerge > 0)
+		{
+			
+		}
+		
+
 	}
 	
 	
@@ -93,5 +119,35 @@ public class GameField {
 		return gamesPlayed;
 	}
 	
+	
+	private int[] append(int[] old, int addedValue)
+	{
+		int length = old.length;
+		int[] newArray = new int[length + 1];
+		
+		for(int i = 0; i < length; i++)
+		{
+			newArray[i] = old[i];
+		}
+		
+		newArray[length] = addedValue;
+		return newArray;
+	}
+	
+	
+	private boolean isUniqueValue(int[] array, int checkValue)
+	{
+		boolean value = true;
+		
+		for(int i = 0; i < array.length; i++)
+		{
+			if(array[i] == checkValue)
+			{
+				value = false;
+			}
+		}
+		
+		return value;
+	}
 	
 }
