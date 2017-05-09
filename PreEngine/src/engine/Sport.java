@@ -76,12 +76,22 @@ public class Sport {
 	}
 	
 	
+	/**
+	 * Getter for the roster object for the sport.
+	 * 
+	 * @return the roster
+	 */
 	public Roster getRoster()
 	{
 		return teams;
 	}
 	
 	
+	/**
+	 * Getter for the gameField object for the sport.
+	 * 
+	 * @return the gameField
+	 */
 	public GameField getGameField()
 	{
 		return games;
