@@ -47,7 +47,13 @@ public class Team {
 		name = newName;
 	}
 	
-	
+	/**
+	 * Equals method for teams
+	 * 
+	 * 
+	 * @param other team to compare to
+	 * @return true or false depending on it the ids are the same
+	 */
 	public boolean equals(Team other)
 	{
 		boolean value = false;
