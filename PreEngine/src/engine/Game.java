@@ -106,6 +106,13 @@ public class Game {
 	}
 	
 	
+	/**
+	 * Returns true or false depending on if team other is in the game.
+	 * True if the game is present and false if it isn't.
+	 * 
+	 * @param other team to test if it is in the game
+	 * @return true or false if the team is present 
+	 */
 	public boolean hasTeam(Team other)
 	{
 		boolean value = false;
@@ -118,6 +125,10 @@ public class Game {
 		return value;
 	}
 	
+	
+	/**
+	 * String representation of the game.
+	 */
 	public String toString()
 	{
 		String game = team1.getName() + " - " + team2.getName() + " : " + team1Score + " - " + team2Score;
@@ -125,11 +136,23 @@ public class Game {
 		return game;
 	}
 	
+	
+	/**
+	 * Getter for the first team in the game.
+	 * 
+	 * @return The first team in the game
+	 */
 	public Team getTeam1()
 	{
 		return team1;
 	}
 	
+	
+	/**
+	 * Getter for the second team in the game.
+	 * 
+	 * @return The second team in the same 
+	 */
 	public Team getTeam2()
 	{
 		return team2;	
