@@ -12,6 +12,15 @@ public class Pathway {
 	
 	private double[] results;
 	
+	
+	/**
+	 * Constructor for the Pathway object
+	 * 
+	 * @param team1 starting team
+	 * @param team2 ending team
+	 * @param level total iterations
+	 * @param sport	sport of the teams
+	 */
 	public Pathway(Team team1, Team team2, int level, Sport sport)
 	{
 		startTeam = team1;
@@ -22,7 +31,11 @@ public class Pathway {
 		this.level = level;
 	}
 	
-	
+	/**
+	 * Driver method for generating pathways
+	 * 
+	 * @return the results of the pathways in an array
+	 */
 	public double[] generatePathway()
 	{
 		results = new double[0];
@@ -37,6 +50,16 @@ public class Pathway {
 	}
 	
 	
+	/**
+	 * Recursive method to generate and process the pathways for each level
+	 * 
+	 * @param team1 starting team
+	 * @param team2 ending team
+	 * @param games GameField of all available games
+	 * @param avaibleTeams Roster of all teams left in the traversal
+	 * @param level number of iterations left
+	 * @param score each "step"
+	 */
 	private void nextLevel(Team team1, Team team2, GameField games, Roster avaibleTeams, int level, double score)
 	{
 		if(level == 0)
@@ -67,6 +90,14 @@ public class Pathway {
 		}
 	}
 	
+	
+	/**
+	 * Helper method to append a value to an array
+	 * 
+	 * @param old Array to append a value onto
+	 * @param addedValue value to append to the old Array
+	 * @return the old Array with the new value appended onto it
+	 */
 	private double[] append(double[] old, double addedValue)
 	{
 		int length = old.length;

@@ -10,18 +10,31 @@ public class GameField {
 
 	private ArrayList<Game> games = new ArrayList<Game>();
 	
+	
+	/**
+	 * Constructor for the GameField
+	 */
 	public GameField()
 	{
 		
 	}
 	
 	
+	/**
+	 * Adds a game to the GameField
+	 * 
+	 * @param game to be added
+	 */
 	public void add(Game game)
 	{
 		games.add(game);
 	}
 	
 	
+	/**
+	 * Checks for more than one games between the same teams
+	 * If there is more than one game between the same teams, each team score is averaged
+	 */
 	public void mergeRepeatGames()
 	{
 		int[] indexes = new int[0]; //values to remove at end of the array
@@ -93,6 +106,12 @@ public class GameField {
 	}
 	
 	
+	/**
+	 * Private method to get all games played by a team
+	 * 
+	 * @param team to find games played
+	 * @return games that team played in
+	 */
 	private ArrayList<Game> getAllGamesPlayed(Team team)
 	{
 		
@@ -109,6 +128,14 @@ public class GameField {
 		return temp;
 	}
 	
+	
+	/**
+	 * Boolean method to determing is there is a game between two teams
+	 * 
+	 * @param team1 
+	 * @param team2
+	 * @return true or false depending on if there is a game between the two teams
+	 */
 	public boolean hasGame(Team team1, Team team2)
 	{
 		boolean result = false;
@@ -128,6 +155,13 @@ public class GameField {
 	}
 	
 	
+	/**
+	 * The score difference between the two teams 
+	 * 
+	 * @param team1 starting team
+	 * @param team2 ending team
+	 * @return the score difference between the teams
+	 */
 	public double getGameDifference(Team team1, Team team2)
 	{
 		double result = 0;
@@ -145,6 +179,10 @@ public class GameField {
 		return result;
 	}
 	
+	
+	/**
+	 * String representation of the GameField Class
+	 */
 	public String toString()
 	{
 		String gamesPlayed = "";
@@ -159,6 +197,13 @@ public class GameField {
 	}
 	
 	
+	/**
+	 * Private helper method to append a value to an array
+	 * 
+	 * @param old Array to append a value onto
+	 * @param addedValue value to append onto old Array
+	 * @return old Array with the addedValue appended to it
+	 */
 	private int[] append(int[] old, int addedValue)
 	{
 		int length = old.length;
@@ -172,7 +217,4 @@ public class GameField {
 		newArray[length] = addedValue;
 		return newArray;
 	}
-	
-	
-	
 }
