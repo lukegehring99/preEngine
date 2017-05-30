@@ -31,10 +31,9 @@ public class GameField {
 	}
 	
 	
-	/**
-	 * Checks for more than one games between the same teams
-	 * If there is more than one game between the same teams, each team score is averaged
-	 */
+	
+	
+	/*
 	public void mergeRepeatGames()
 	{
 		int[] indexes = new int[0]; //values to remove at end of the array
@@ -104,6 +103,62 @@ public class GameField {
 		}
 		
 	}
+	*/
+	
+	/**
+	 * Checks for more than one games between the same teams
+	 * If there is more than one game between the same teams, each team score is averaged
+	 */
+	public void mergeRepeatGames()
+	{
+		@SuppressWarnings("unchecked")
+		ArrayList<Game> cloneGame = (ArrayList<Game>) games.clone();
+		ArrayList<Game> newGames = new ArrayList<Game>();
+		
+		
+		while (cloneGame.size() > 0)
+		{
+			int[] indexes = new int[0];
+			indexes = append(indexes, 0);
+			
+			for(int i = 1; i < cloneGame.size(); i++)
+			{
+				if(cloneGame.get(i).hasTeam(cloneGame.get(0).getTeam1()) && cloneGame.get(i).hasTeam(cloneGame.get(0).getTeam2()))
+				{
+					indexes = append(indexes, i);
+				}
+			}
+			
+			double scoreA = 0;
+			double scoreB = 0;
+		
+			Team teamA = cloneGame.get(0).getTeam1();
+			Team teamB = cloneGame.get(0).getTeam2();
+			
+			for(int i = indexes.length - 1; i >= 0; i--)
+			{
+				if (cloneGame.get(indexes[i]).getTeam1().equals(cloneGame.get(0).getTeam1()))
+				{
+					scoreA += cloneGame.get(indexes[i]).getTeam1Score();
+					scoreB += cloneGame.get(indexes[i]).getTeam2Score();
+				}
+				else
+				{
+					scoreA += cloneGame.get(indexes[i]).getTeam2Score();
+					scoreB += cloneGame.get(indexes[i]).getTeam1Score();
+				}
+				cloneGame.remove(indexes[i]);
+			}
+			
+			int numberOfGames = indexes.length;
+			newGames.add(new Game(teamA, scoreA/numberOfGames, teamB, scoreB/numberOfGames));
+			
+		}
+		
+		games = newGames;
+	}
+	
+	
 	
 	
 	/**
@@ -178,6 +233,38 @@ public class GameField {
 		
 		return result;
 	}
+	
+	
+	
+	public void generateAverages(Roster roster)
+	{
+		ArrayList<Team> teams = roster.getTeams();
+		
+		for(int i = 0; i < teams.size(); i++)
+		{
+			ArrayList<Game> games = getAllGamesPlayed(teams.get(i));
+			
+			double score = 0;
+			
+			for(int k = 0; k < games.size(); k++)
+			{
+				  if(games.get(k).getTeam1().equals(teams.get(i)))
+				  {
+					  score += games.get(k).getTeam1Score();
+				  }
+				  else
+				  {
+					  score += games.get(k).getTeam2Score();
+				  }
+			}
+			
+			score = score / games.size();
+			
+			teams.get(i).setAverage(score);
+		}
+	}
+	
+	
 	
 	
 	/**

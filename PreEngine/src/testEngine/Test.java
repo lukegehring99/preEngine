@@ -29,11 +29,21 @@ public class Test {
 		Game game3 = new Game(c, 4, a, 2);
 		s.addGame(game3);
 		
+		Game game4 = new Game(a, 3, b, 6);
+		s.addGame(game4);
+		
 		System.out.println(s.getGameField());
 		
-		s.getGameField().mergeRepeatGames();
+		s.generateAverages();
 		
-		System.out.println(s.getGameField());
+		System.out.println(a.getAverage());
+		
+		
+		//s.getGameField().mergeRepeatGames();
+		
+		//System.out.println(s.getGameField());
+		
+		
 		
 		
 		/*

@@ -96,5 +96,10 @@ public class Sport {
 	{
 		return games;
 	}
+	
+	public void generateAverages()
+	{
+		games.generateAverages(teams);
+	}
 }
 

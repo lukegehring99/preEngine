@@ -5,6 +5,7 @@ public class Team {
 	private int id;        // Unique id representing the team
 	private String name;   // Name of the team
 	private static int nextID = 0;
+	private double averageScore;
 	
 	/**
 	 * Team Constructor
@@ -66,5 +67,16 @@ public class Team {
 		return value;
 	}
 	
+	
+	public void setAverage(double avg)
+	{
+		averageScore = avg;
+	}
+	
+	
+	public double getAverage()
+	{
+		return averageScore;
+	}
 	
 }
