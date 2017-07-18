@@ -8,7 +8,8 @@ import java.util.ArrayList;
 
 public class GameField {
 
-	private ArrayList<Game> games = new ArrayList<Game>();
+	private ArrayList<Game> allGames = new ArrayList<Game>();
+	private ArrayList<Game> compressedGames = new ArrayList<Game>();
 	
 	
 	/**
@@ -27,7 +28,8 @@ public class GameField {
 	 */
 	public void add(Game game)
 	{
-		games.add(game);
+		allGames.add(game);
+//		mergeRepeatGames();
 	}
 	
 	
@@ -35,36 +37,40 @@ public class GameField {
 	 * Checks for more than one games between the same teams
 	 * If there is more than one game between the same teams, each team score is averaged
 	 */
+	@SuppressWarnings("unchecked")
 	public void mergeRepeatGames()
 	{
+		
+		compressedGames = (ArrayList<Game>) allGames.clone();
+		
 		int[] indexes = new int[0]; //values to remove at end of the array
 		
 		ArrayList<Game> addedGames = new ArrayList<Game>();
 		
-		for(int i = 0; i < games.size() - 1; i++)
+		for(int i = 0; i < compressedGames.size() - 1; i++)
 		{
 			
-			double scoreA = games.get(i).getTeam1Score();
-			double scoreB = games.get(i).getTeam2Score();
+			double scoreA = compressedGames.get(i).getTeam1Score();
+			double scoreB = compressedGames.get(i).getTeam2Score();
 			int[] temp = new int[1];
 			
 			temp[0] = i;
 			
-			for(int k = i + 1; k < games.size(); k++) // For every game following the previous game
+			for(int k = i + 1; k < compressedGames.size(); k++) // For every game following the previous game
 			{
-				if(games.get(i).hasTeam(games.get(k).getTeam1()) && games.get(i).hasTeam(games.get(k).getTeam2())) //If the games are the same
+				if(compressedGames.get(i).hasTeam(compressedGames.get(k).getTeam1()) && compressedGames.get(i).hasTeam(compressedGames.get(k).getTeam2())) //If the games are the same
 				{
 						temp = append(temp, k);
 						
-						if(games.get(i).getTeam1().equals(games.get(k).getTeam1()))
+						if(compressedGames.get(i).getTeam1().equals(compressedGames.get(k).getTeam1()))
 						{
-							scoreA += games.get(k).getTeam1Score();
-							scoreB += games.get(k).getTeam2Score();
+							scoreA += compressedGames.get(k).getTeam1Score();
+							scoreB += compressedGames.get(k).getTeam2Score();
 						}
 						else
 						{
-							scoreA += games.get(k).getTeam2Score();
-							scoreB += games.get(k).getTeam1Score();
+							scoreA += compressedGames.get(k).getTeam2Score();
+							scoreB += compressedGames.get(k).getTeam1Score();
 						}	
 				}
 			}
@@ -73,7 +79,7 @@ public class GameField {
 			
 			for(Game game : addedGames)
 			{
-				if(game.hasTeam(games.get(i).getTeam1()) && game.hasTeam(games.get(i).getTeam2()))
+				if(game.hasTeam(compressedGames.get(i).getTeam1()) && game.hasTeam(compressedGames.get(i).getTeam2()))
 				{
 					shouldBeAdded = false;
 				}
@@ -82,7 +88,7 @@ public class GameField {
 			if(shouldBeAdded && temp.length > 1)
 			{
 				int numberOfGames = temp.length;
-				addedGames.add(new Game(games.get(i).getTeam1(), scoreA/numberOfGames, games.get(i).getTeam2(), scoreB/numberOfGames));
+				addedGames.add(new Game(compressedGames.get(i).getTeam1(), scoreA/numberOfGames, compressedGames.get(i).getTeam2(), scoreB/numberOfGames));
 				
 				for(int q = 0; q < temp.length; q++)
 				{
@@ -95,12 +101,12 @@ public class GameField {
 		
 		for(int i = indexes.length; i > 0; i--)
 		{
-			games.remove(indexes[i - 1]);
+			compressedGames.remove(indexes[i - 1]);
 		}
 		
 		for(Game add : addedGames)
 		{
-			games.add(add);
+			compressedGames.add(add);
 		}
 		
 	}
@@ -117,7 +123,7 @@ public class GameField {
 		
 		ArrayList<Game> temp = new ArrayList<Game>();
 		
-		for(Game game : games)
+		for(Game game : compressedGames)
 		{
 			if (game.hasTeam(team))
 			{
@@ -187,11 +193,19 @@ public class GameField {
 	{
 		String gamesPlayed = "";
 		
-		for(Game game : games)
+		gamesPlayed += "All Games: ";
+		
+		for(Game game : allGames)
 		{
 			gamesPlayed += "[" + game.toString() + "] ";
 		}
 		
+		gamesPlayed += " | Compressed games: ";
+		
+		for(Game game : compressedGames)
+		{
+			gamesPlayed += "[" + game.toString() + "] ";
+		}
 		
 		return gamesPlayed;
 	}
