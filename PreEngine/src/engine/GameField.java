@@ -33,11 +33,8 @@ public class GameField {
 	}
 	
 	
-	/**
-	 * Checks for more than one games between the same teams
-	 * If there is more than one game between the same teams, each team score is averaged
-	 */
-	@SuppressWarnings("unchecked")
+	
+	/*
 	public void mergeRepeatGames()
 	{
 		
@@ -111,6 +108,63 @@ public class GameField {
 		}
 		
 	}
+	*/
+	
+	
+	/**
+	 * Checks for more than one games between the same teams
+	 * If there is more than one game between the same teams, each team score is averaged
+	 */
+	public void mergeRepeatGames()
+	{
+		@SuppressWarnings("unchecked")
+		ArrayList<Game> cloneGame = (ArrayList<Game>) allGames.clone();
+		ArrayList<Game> newGames = new ArrayList<Game>();
+		
+		
+		while (cloneGame.size() > 0)
+		{
+			int[] indexes = new int[0];
+			indexes = append(indexes, 0);
+			
+			for(int i = 1; i < cloneGame.size(); i++)
+			{
+				if(cloneGame.get(i).hasTeam(cloneGame.get(0).getTeam1()) && cloneGame.get(i).hasTeam(cloneGame.get(0).getTeam2()))
+				{
+					indexes = append(indexes, i);
+				}
+			}
+			
+			double scoreA = 0;
+			double scoreB = 0;
+		
+			Team teamA = cloneGame.get(0).getTeam1();
+			Team teamB = cloneGame.get(0).getTeam2();
+			
+			for(int i = indexes.length - 1; i >= 0; i--)
+			{
+				if (cloneGame.get(indexes[i]).getTeam1().equals(cloneGame.get(0).getTeam1()))
+				{
+					scoreA += cloneGame.get(indexes[i]).getTeam1Score();
+					scoreB += cloneGame.get(indexes[i]).getTeam2Score();
+				}
+				else
+				{
+					scoreA += cloneGame.get(indexes[i]).getTeam2Score();
+					scoreB += cloneGame.get(indexes[i]).getTeam1Score();
+				}
+				cloneGame.remove(indexes[i]);
+			}
+			
+			int numberOfGames = indexes.length;
+			newGames.add(new Game(teamA, scoreA/numberOfGames, teamB, scoreB/numberOfGames));
+			
+		}
+		
+		compressedGames = newGames;
+	}
+	
+	
 	
 	
 	/**
