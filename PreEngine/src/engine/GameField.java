@@ -86,6 +86,7 @@ public class GameField {
 				for(int q = 0; q < temp.length; q++)
 				{
 					indexes = append(indexes, temp[q]);
+					hello this is a test
 				}
 				
 			}

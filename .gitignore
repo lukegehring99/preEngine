@@ -73,3 +73,4 @@ PreEngine/.classpath
 .metadata/.mylyn/.taskListIndex/segments_3
 .recommenders/index/http___download_eclipse_org_recommenders_models_neon_/segments_6
 *.registry
+*.state
