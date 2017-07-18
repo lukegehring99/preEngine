@@ -29,7 +29,7 @@ public class GameField {
 	public void add(Game game)
 	{
 		allGames.add(game);
-//		mergeRepeatGames();
+		mergeRepeatGames();
 	}
 	
 	
