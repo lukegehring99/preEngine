@@ -266,6 +266,41 @@ public class GameField {
 	}
 	
 	
+	public void generateAverages(Roster roster)
+	{
+		ArrayList<Team> teams = roster.getTeams();
+		
+		for(int i = 0; i < teams.size(); i++)
+		{
+			ArrayList<Game> games = getAllGamesPlayed(teams.get(i));
+			
+			double score = 0;
+			
+			for(int k = 0; k < games.size(); k++)
+			{
+				  if(games.get(k).getTeam1().equals(teams.get(i)))
+				  {
+					  score += games.get(k).getTeam1Score();
+				  }
+				  else
+				  {
+					  score += games.get(k).getTeam2Score();
+				  }
+			}
+			
+			score = score / games.size();
+			
+			teams.get(i).setAverage(score);
+		}
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 	/**
 	 * Private helper method to append a value to an array
 	 * 
