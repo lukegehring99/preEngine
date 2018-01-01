@@ -1,6 +1,6 @@
 package engine;
 
-
+import java.io.Serializable;
 
 public class Sport {
 

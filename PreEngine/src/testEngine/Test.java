@@ -1,6 +1,11 @@
 package testEngine;
 import engine.*;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+
+
 public class Test {
 
 	public static void main(String[] args) {
@@ -38,6 +43,10 @@ public class Test {
 		
 		System.out.println(s.getGameField());
 		
+		
+		Test obj = new Test();
+		
+		obj.serializeSport(s);
 		
 		/*
 		Team d = new Team("D");
@@ -89,6 +98,21 @@ public class Test {
 		}
 		*/
 		
+		
+	}
+
+	public void serializeSport(Sport sport) {
+		
+		FileOutputStream fout = null;
+		ObjectOutputStream oos = null;
+		
+		try
+		{
+			fout = new FileOutputStream("");
+		}catch (Exception ex)
+		{
+			
+		}
 		
 	}
 
