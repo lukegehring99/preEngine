@@ -1,5 +1,6 @@
 package engine;
 
+import java.io.Serializable;
 
 /**
  * Game Class 
@@ -11,7 +12,9 @@ package engine;
  * 
  * @author Luke Gehring
  */
-public class Game {
+public class Game implements Serializable{
+	
+	private static final long serialVersionUID = 1L;
 	
 	private Team team1;              // Team 1 in the Game
 	private double team1Score;       // Points team 1 scored

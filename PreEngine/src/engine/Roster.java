@@ -1,11 +1,15 @@
 package engine;
 
 import java.util.ArrayList;
+import java.io.Serializable;
 
 // Custom container for the teams
 
-public class Roster 
+public class Roster implements Serializable
 {
+	
+	private static final long serialVersionUID = 1L;
+	
 	private ArrayList<Team> teams = new ArrayList<Team>();
 	
 	

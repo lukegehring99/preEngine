@@ -1,13 +1,16 @@
 package engine;
 
 import java.util.ArrayList;
+import java.io.Serializable;
 
 // This is a custom container class
 // Contains all the games for a season
 
 
-public class GameField {
+public class GameField implements Serializable{
 
+	private static final long serialVersionUID = 1L;
+	
 	private ArrayList<Game> allGames = new ArrayList<Game>();
 	private ArrayList<Game> compressedGames = new ArrayList<Game>();
 	

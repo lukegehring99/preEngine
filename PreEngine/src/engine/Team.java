@@ -1,6 +1,10 @@
 package engine;
 
-public class Team {
+import java.io.Serializable;
+
+public class Team implements Serializable{
+	
+	private static final long serialVersionUID = 1L;
 	
 	private int id;        // Unique id representing the team
 	private String name;   // Name of the team

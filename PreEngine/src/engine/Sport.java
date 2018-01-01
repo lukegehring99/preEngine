@@ -2,8 +2,10 @@ package engine;
 
 import java.io.Serializable;
 
-public class Sport {
+public class Sport implements Serializable{
 
+	private static final long serialVersionUID = 1L;
+	
 	private GameField games;     // Container for the GameField
 	private Roster teams;        // Container for the Roster
 	

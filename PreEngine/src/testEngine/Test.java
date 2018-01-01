@@ -1,9 +1,7 @@
 package testEngine;
 import engine.*;
 
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
+
 
 
 public class Test {
@@ -37,16 +35,14 @@ public class Test {
 		Game game4 = new Game(a, 3, b, 6);
 		s.addGame(game4);
 		
-		System.out.println(s.getGameField());
+		//System.out.println(s.getGameField());
 		
 		s.getGameField().mergeRepeatGames();
 		
-		System.out.println(s.getGameField());
+		//System.out.println(s.getGameField());
 		
 		
-		Test obj = new Test();
 		
-		obj.serializeSport(s);
 		
 		/*
 		Team d = new Team("D");
@@ -98,23 +94,20 @@ public class Test {
 		}
 		*/
 		
+		//Test obj = new Test();
+		
+		//obj.serializeSport(s);
+		
+		DataExport k = new DataExport("C:\\Users\\Luke\\Documents\\GitHub\\preEngine\\saves\\");
+		k.serializeSport(s);
+		
+		DataImport d = new DataImport("C:\\Users\\Luke\\Documents\\GitHub\\preEngine\\saves\\ball.spr");
+		Sport test = d.deserialzeSport();
+		System.out.println(test.getGameField());
 		
 	}
 
-	public void serializeSport(Sport sport) {
-		
-		FileOutputStream fout = null;
-		ObjectOutputStream oos = null;
-		
-		try
-		{
-			fout = new FileOutputStream("");
-		}catch (Exception ex)
-		{
-			
-		}
-		
-	}
+	
 
 	public static void printArray(double[] array)
 	{
