@@ -94,9 +94,6 @@ public class Test {
 		}
 		*/
 		
-		//Test obj = new Test();
-		
-		//obj.serializeSport(s);
 		
 		DataExport k = new DataExport("C:\\Users\\Luke\\Documents\\GitHub\\preEngine\\saves\\");
 		k.serializeSport(s);

@@ -4,13 +4,11 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 
-// Imports the data from a excel sheet with the specified guidelines
+
 public class DataImport {
 	
 	private String address;
 	
-	//Takes a excel sheet, creates a Sport object, creates all the game objects
-	//Adds all of the game objects to GameField
 	public DataImport(String address)
 	{
 		this.address = address;
