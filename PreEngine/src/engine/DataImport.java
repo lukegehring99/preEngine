@@ -50,6 +50,8 @@ public class DataImport {
 
 		}
 
+		Team.setID(sport.getIDMax());
+		
 		return sport;
 	}
 	

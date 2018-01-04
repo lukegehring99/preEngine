@@ -193,6 +193,23 @@ public class GameField implements Serializable{
 	}
 	
 	
+	public ArrayList<Game> getAllGamesPlayedPointer(Team team)
+	{
+		
+		ArrayList<Game> temp = new ArrayList<Game>();
+		
+		for(Game game : allGames)
+		{
+			if (game.hasTeam(team))
+			{
+				temp.add(game);
+			}
+		}
+		
+		return temp;
+	} 
+	
+	
 	/**
 	 * Boolean method to determing is there is a game between two teams
 	 * 
@@ -298,6 +315,18 @@ public class GameField implements Serializable{
 	}
 	
 	
+	public void deleteGame(Game game)
+	{
+		for(int i = 0; i < allGames.size(); i++)
+		{
+			if(allGames.get(i) == game)
+			{
+				allGames.remove(i);
+				break;
+			}
+		}
+		mergeRepeatGames();
+	}
 	
 	
 	

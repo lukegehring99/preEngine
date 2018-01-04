@@ -1,6 +1,7 @@
 package engine;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class Sport implements Serializable{
 
@@ -8,6 +9,7 @@ public class Sport implements Serializable{
 	
 	private GameField games;     // Container for the GameField
 	private Roster teams;        // Container for the Roster
+	private int teamIDMax;
 	
 	@SuppressWarnings("unused")
 	private int id;                                 // Unique Id representing the sport
@@ -31,6 +33,8 @@ public class Sport implements Serializable{
 		
 		games = new GameField();
 		teams = new Roster();
+		
+		teamIDMax = 0;
 	}
 	
 	
@@ -53,6 +57,7 @@ public class Sport implements Serializable{
 	public void addTeam(Team team)
 	{
 		teams.add(team);
+		teamIDMax++;
 	}
 	
 	
@@ -102,6 +107,26 @@ public class Sport implements Serializable{
 	public void generateAverages()
 	{
 		games.generateAverages(teams);
+	}
+	
+	public int getIDMax()
+	{
+		return teamIDMax;
+	}
+	
+	public void deleteGame(Game game)
+	{
+		games.deleteGame(game);
+	}
+	
+	public void deleteTeam(Team team)
+	{
+		ArrayList<Game> toDelete = games.getAllGamesPlayedPointer(team);
+		for(Game temp : toDelete)
+		{
+			deleteGame(temp);
+		}
+		teams.deleteTeam(team);
 	}
 }
 

@@ -35,11 +35,13 @@ public class Test {
 		Game game4 = new Game(a, 3, b, 6);
 		s.addGame(game4);
 		
-		//System.out.println(s.getGameField());
+		System.out.println(s.getGameField());
+		System.out.println(s.getRoster() + "\n");
 		
-		s.getGameField().mergeRepeatGames();
+		s.deleteTeam(b);
 		
-		//System.out.println(s.getGameField());
+		System.out.println(s.getGameField());
+		System.out.println(s.getRoster());
 		
 		
 		
@@ -95,12 +97,12 @@ public class Test {
 		*/
 		
 		
-		DataExport k = new DataExport("C:\\Users\\Luke\\Documents\\GitHub\\preEngine\\saves\\");
-		k.serializeSport(s);
+		//DataExport k = new DataExport("C:\\Users\\Luke\\Documents\\GitHub\\preEngine\\saves\\");
+		//k.serializeSport(s);
 		
-		DataImport d = new DataImport("C:\\Users\\Luke\\Documents\\GitHub\\preEngine\\saves\\ball.spr");
-		Sport test = d.deserialzeSport();
-		System.out.println(test.getGameField());
+		//DataImport d = new DataImport("C:\\Users\\Luke\\Documents\\GitHub\\preEngine\\saves\\ball.spr");
+		//Sport test = d.deserialzeSport();
+		//System.out.println(test.getGameField());
 		
 	}
 

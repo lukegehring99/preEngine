@@ -66,6 +66,20 @@ public class Roster implements Serializable
 		
 	}
 	
+	public void deleteTeam(Team team)
+	{
+		int id = team.getId();
+		for(int i = 0; i < teams.size(); i++)
+		{
+			if(teams.get(i).getId() == id)
+			{
+				teams.remove(i);
+				break;
+			}
+		}
+			
+	}
+	
 	
 	/**
 	 * String representation of the Roster Object

@@ -83,5 +83,9 @@ public class Team implements Serializable{
 		return averageScore;
 	}
 	
+	public static void setID(int id)
+	{
+		nextID = id;
+	}
 	
 }
