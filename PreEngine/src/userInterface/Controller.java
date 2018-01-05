@@ -1,7 +1,6 @@
 package userInterface;
 
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import engine.*;
@@ -26,7 +25,7 @@ public class Controller implements Initializable{
 	private int state;
 	private String teamOne;
 	private String teamTwo;
-	private String fileLocation;
+	//private String fileLocation;
 	
 	
 	@Override
@@ -50,6 +49,14 @@ public class Controller implements Initializable{
 	
 	public void addGame()
 	{
+		Game game = GameEnter.display();
+		
+		if(game == null)
+		{
+			return;
+		}
+		
+		Window.addGame(game);
 		
 	}
 	
@@ -79,12 +86,29 @@ public class Controller implements Initializable{
 		
 	}
 	
+	private String selectedItem;
+	
 	public void teamSelected()
 	{
-		System.out.println(state);
+		
+		if(state == 3)
+		{
+			if(selectedItem.equals(teamList.getSelectionModel().getSelectedItem()))
+			{
+				TeamEdit.display(selectedItem);
+			}
+			state = 0;
+			return;
+		}
+		
 		if(state == 0)
 		{
-			// pull up the edit menu
+			selectedItem = teamList.getSelectionModel().getSelectedItem();
+			if(selectedItem == null)
+			{
+				return;
+			}
+			state = 3;
 		}
 		else if(state == 1)
 		{
@@ -95,6 +119,7 @@ public class Controller implements Initializable{
 				state = 0;
 			}
 			teamList.getSelectionModel().clearSelection();
+			team1.setSelected(false);
 
 		}
 		else if(state == 2)
@@ -106,15 +131,12 @@ public class Controller implements Initializable{
 				state = 0;
 			}
 			teamList.getSelectionModel().clearSelection();
+			team2.setSelected(false);
 		}
 		
 	}
 	
 	
 
-	private Team getTeam(String name)
-	{
-		// This assumes the strings are unique
-		return null;
-	}
+
 }

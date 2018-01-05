@@ -38,6 +38,11 @@ public class Window extends Application
     	sport.addTeam(new Team(name));
     }
     
+    public static void addGame(Game game)
+    {
+    	sport.addGame(game);
+    }
+    
     public static boolean isUnique(String name)
     {
     	Roster temp = sport.getRoster();
@@ -64,6 +69,21 @@ public class Window extends Application
     	
     	return temp;
     	
+    }
+    
+    
+    
+    public static Team getTeam(String name)
+    {
+    	for(Team team : sport.getRoster().getTeams())
+    	{
+    		if(name.equals(team.getName()))
+    		{
+    			return team;
+    		}
+    	}
+    	return null;
+
     }
 
 	
