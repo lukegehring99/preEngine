@@ -32,7 +32,7 @@ public class GameEnter {
 	{
 		window = new Stage();
 		
-		label = new Label("The team name must be unique.");
+		label = new Label("Enter a Game.");
 		
 		window.initModality(Modality.APPLICATION_MODAL);
 		window.setTitle("Enter a Game");
@@ -110,6 +110,11 @@ public class GameEnter {
 		if(teamTwo == null)
 		{
 			teamTwoSelect.setPromptText("Team not selected!");
+			valid = false;
+		}
+		if(teamOne.equals(teamTwo))
+		{
+			label.setText("Teams must be different!");
 			valid = false;
 		}
 		

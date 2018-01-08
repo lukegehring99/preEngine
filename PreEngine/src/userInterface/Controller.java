@@ -96,6 +96,7 @@ public class Controller implements Initializable{
 			if(selectedItem.equals(teamList.getSelectionModel().getSelectedItem()))
 			{
 				TeamEdit.display(selectedItem);
+				// do some stuff with "return" class
 			}
 			state = 0;
 			return;
@@ -134,6 +135,11 @@ public class Controller implements Initializable{
 			team2.setSelected(false);
 		}
 		
+	}
+	
+	public void deleted(String name)
+	{
+		teamList.getItems().remove(name);
 	}
 	
 	

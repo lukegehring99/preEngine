@@ -85,6 +85,17 @@ public class Window extends Application
     	return null;
 
     }
+    
+    public static ArrayList<Game> getGamesPlayedBy(Team team)
+    {
+    	return sport.getGameField().getAllGamesPlayedPointer(team);
+    }
+    
+    public static void delete(Team team)
+    {
+    	sport.deleteTeam(team);
+    	
+    }
 
 	
 	
