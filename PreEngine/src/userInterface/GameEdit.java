@@ -29,14 +29,17 @@ public class GameEdit {
 	
 	static Game selected;
 	
+	static String team1;
+	static String team2;
+	
 	public static void display(HBox game)
 	{
 		
-		String team1 = ((Label) game.getChildren().get(0)).getText();
+		team1 = ((Label) game.getChildren().get(0)).getText();
 		int team1Score = Integer.parseInt(((Label) game.getChildren().get(1)).getText());
 		
 		int team2Score = Integer.parseInt(((Label) game.getChildren().get(3)).getText());
-		String team2 = ((Label) game.getChildren().get(4)).getText();
+		team2 = ((Label) game.getChildren().get(4)).getText();
 		
 		selected = Window.getGame(team1, team1Score, team2, team2Score);
 		System.out.println(selected);
@@ -59,19 +62,24 @@ public class GameEdit {
 		
 		team1ScoreInput = new TextField();
 		team1ScoreInput.setText(Integer.toString(team1Score));
+		team1ScoreInput.setMaxWidth(100);
 		
 		team2ScoreInput = new TextField();
 		team2ScoreInput.setText(Integer.toString(team2Score));
+		team2ScoreInput.setMaxWidth(100);
 		
 		fields = new HBox();
+		fields.setSpacing(10);
 		fields.getChildren().addAll(team1Name, team1ScoreInput, team2ScoreInput, team2Name);
+		fields.setAlignment(Pos.CENTER);
+		
 		
 		VBox layout = new VBox(10);
+		layout.setPadding(new Insets(10, 10, 10, 10));
 		layout.getChildren().addAll(label, fields, enterButton, deleteButton);
 		layout.setAlignment(Pos.CENTER);
-		layout.setPadding(new Insets(10,10, 10, 10));
 		
-		Scene scene = new Scene(layout, 300, 150);
+		Scene scene = new Scene(layout, 500, 150);
 		window.setScene(scene);
 		window.showAndWait();
 		
@@ -86,6 +94,16 @@ public class GameEdit {
 	
 	public static void enterPressed()
 	{
-		
+		if(team1.equals(selected.getTeam1().getName()))
+		{
+			selected.setTeam1Score(Double.parseDouble(team1ScoreInput.getText()));
+			selected.setTeam2Score(Double.parseDouble(team2ScoreInput.getText()));
+		}
+		else
+		{
+			selected.setTeam1Score(Double.parseDouble(team2ScoreInput.getText()));
+			selected.setTeam2Score(Double.parseDouble(team1ScoreInput.getText()));
+		}
+		window.close();
 	}
 }

@@ -42,7 +42,6 @@ public class TeamEdit
 		window.setTitle(selection);
 		
 		team = Window.getTeam(selection);
-		ArrayList<Game> games = Window.getGamesPlayedBy(team);
 		
 		table = new ListView<>();
 		table.setOnMouseClicked(e -> teamSelected());
@@ -50,52 +49,7 @@ public class TeamEdit
 		
 		label = new Label("Games played by " + selection);
 		
-		for(Game game: games)
-		{
-			Label teamOneName = new Label();
-			teamOneName.setMinWidth(100);
-			teamOneName.setMaxWidth(100);
-			
-			Label teamTwoName = new Label();
-			teamTwoName.setMinWidth(100);
-			teamTwoName.setMaxWidth(100);
-			teamTwoName.setAlignment(Pos.CENTER_RIGHT);
-			
-			Label teamOneScore = new Label();
-			teamOneScore.setMinWidth(100);
-			teamOneScore.setMaxWidth(100);
-			teamOneScore.setAlignment(Pos.CENTER_RIGHT);
-			
-			Label teamTwoScore = new Label();
-			teamTwoScore.setMinWidth(100);
-			teamTwoScore.setMaxWidth(100);
-			
-			Label dash = new Label("-");
-			dash.setMinWidth(40);
-			dash.setMaxWidth(40);
-			dash.setAlignment(Pos.CENTER);
-			
-			if(game.getTeam1().getName().equals(selection))
-			{
-				teamOneName.setText(game.getTeam1().getName());
-				teamOneScore.setText(Integer.toString((int) game.getTeam1Score()));
-				teamTwoName.setText(game.getTeam2().getName());
-				teamTwoScore.setText(Integer.toString((int) game.getTeam2Score()));
-			}
-			else
-			{
-				teamOneName.setText(game.getTeam2().getName());
-				teamOneScore.setText(Integer.toString((int) game.getTeam2Score()));
-				teamTwoName.setText(game.getTeam1().getName());
-				teamTwoScore.setText(Integer.toString((int) game.getTeam1Score()));
-			}
-			
-			
-			HBox line = new HBox();
-			line.getChildren().addAll(teamOneName, teamOneScore, dash, teamTwoScore, teamTwoName);
-			table.getItems().add(line);
-		}
-		
+		refresh();
 		
 		Button editButton = new Button("Edit");
 		editButton.setOnAction(e -> editPressed(name));
@@ -128,7 +82,37 @@ public class TeamEdit
 		label.setText("Games played by " + newTeam);
 		name = newTeam;
 		
-		// Refresh the game list
+		refresh();
+	}
+	
+	static HBox selected;
+	
+	public static void teamSelected()
+	{
+		if(state == 0)
+		{
+			selected = table.getSelectionModel().getSelectedItem();
+			state = 1;
+		}
+		else if(state == 1)
+		{
+			if(table.getSelectionModel().getSelectedItem() == selected)
+			{
+				
+				GameEdit.display(selected);
+				state = 0;
+				refresh();
+			}
+			else
+			{
+				state = 0;
+			}
+		}
+	}
+	
+	
+	private static void refresh()
+	{
 		ArrayList<Game> games = Window.getGamesPlayedBy(team);
 		table.getItems().clear();
 		
@@ -176,30 +160,6 @@ public class TeamEdit
 			HBox line = new HBox();
 			line.getChildren().addAll(teamOneName, teamOneScore, dash, teamTwoScore, teamTwoName);
 			table.getItems().add(line);
-		}
-	}
-	
-	static HBox selected;
-	
-	private static void teamSelected()
-	{
-		if(state == 0)
-		{
-			selected = table.getSelectionModel().getSelectedItem();
-			state = 1;
-		}
-		else if(state == 1)
-		{
-			if(table.getSelectionModel().getSelectedItem() == selected)
-			{
-				
-				GameEdit.display(selected);
-				state = 0;
-			}
-			else
-			{
-				state = 0;
-			}
 		}
 	}
 }

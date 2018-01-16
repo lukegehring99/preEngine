@@ -38,7 +38,7 @@ public class TeamEnter {
 		layout.setAlignment(Pos.CENTER);
 		layout.setPadding(new Insets(10,10, 10, 10));
 		
-		Scene scene = new Scene(layout, 200, 150);
+		Scene scene = new Scene(layout, 300, 150);
 		window.setScene(scene);
 		window.showAndWait();
 		
