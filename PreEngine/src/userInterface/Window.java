@@ -96,7 +96,42 @@ public class Window extends Application
     	sport.deleteTeam(team);
     	
     }
+    
+    public static Game getGame(String team1, int team1Score, String team2, int team2Score)
+    {
+    	ArrayList<Game> games = getGamesPlayedBy(getTeam(team1));
+    	
+    	for(Game game: games)
+    	{
+    		if(game.getTeam1().getName().equals(team1))
+    		{
+    			if(game.getTeam2().getName().equals(team2))
+    			{
+    				if(((int)game.getTeam1Score()) == team1Score && ((int)game.getTeam2Score()) == team2Score)
+    				{
+    					return game;
+    				}
+    			}
+    		}
+    		else
+    		{
+    			if(game.getTeam1().getName().equals(team2))
+    			{
+    				if(((int)game.getTeam1Score()) == team2Score && ((int)game.getTeam2Score()) == team1Score)
+    				{
+    					return game;
+    				}
+    			}
+    		}
+    	}
+    	
+    	
+    	return null;
+    }
 
-	
+	public static void deleteGame(Game game)
+	{
+		sport.deleteGame(game);
+	}
 	
 }

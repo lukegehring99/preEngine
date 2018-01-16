@@ -96,7 +96,7 @@ public class Controller implements Initializable{
 			if(selectedItem.equals(teamList.getSelectionModel().getSelectedItem()))
 			{
 				TeamEdit.display(selectedItem);
-				// do some stuff with "return" class
+				refreshTeams();
 			}
 			state = 0;
 			return;
@@ -142,6 +142,11 @@ public class Controller implements Initializable{
 		teamList.getItems().remove(name);
 	}
 	
+	private void refreshTeams()
+	{
+		teamList.getItems().clear();
+		teamList.getItems().addAll(Window.getTeams());
+	}
 	
 
 

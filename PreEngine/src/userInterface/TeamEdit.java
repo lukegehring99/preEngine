@@ -24,12 +24,17 @@ public class TeamEdit
 	static TextField enter;
 	static Stage window;
 	
+	static int state;
+	
 	static Team team;
 	
 	static ListView<HBox> table;
 	
 	public static void display(String selection)
 	{
+		state = 0;
+		name = selection;
+		
 		window = new Stage();
 		
 
@@ -40,6 +45,7 @@ public class TeamEdit
 		ArrayList<Game> games = Window.getGamesPlayedBy(team);
 		
 		table = new ListView<>();
+		table.setOnMouseClicked(e -> teamSelected());
 		table.setMaxWidth(470);
 		
 		label = new Label("Games played by " + selection);
@@ -92,7 +98,7 @@ public class TeamEdit
 		
 		
 		Button editButton = new Button("Edit");
-		//enterButton.setOnAction(e -> enterPressed());
+		editButton.setOnAction(e -> editPressed(name));
 		
 		Button deleteButton = new Button("Delete");
 		deleteButton.setOnAction(e -> deletePressed());
@@ -112,5 +118,88 @@ public class TeamEdit
 	public static void deletePressed()
 	{
 		Window.delete(team);
+		window.close();
+	}
+	
+	public static void editPressed(String nameOld)
+	{
+		String newTeam = NameEdit.display(nameOld);
+		window.setTitle(newTeam);
+		label.setText("Games played by " + newTeam);
+		name = newTeam;
+		
+		// Refresh the game list
+		ArrayList<Game> games = Window.getGamesPlayedBy(team);
+		table.getItems().clear();
+		
+		for(Game game: games)
+		{
+			Label teamOneName = new Label();
+			teamOneName.setMinWidth(100);
+			teamOneName.setMaxWidth(100);
+			
+			Label teamTwoName = new Label();
+			teamTwoName.setMinWidth(100);
+			teamTwoName.setMaxWidth(100);
+			teamTwoName.setAlignment(Pos.CENTER_RIGHT);
+			
+			Label teamOneScore = new Label();
+			teamOneScore.setMinWidth(100);
+			teamOneScore.setMaxWidth(100);
+			teamOneScore.setAlignment(Pos.CENTER_RIGHT);
+			
+			Label teamTwoScore = new Label();
+			teamTwoScore.setMinWidth(100);
+			teamTwoScore.setMaxWidth(100);
+			
+			Label dash = new Label("-");
+			dash.setMinWidth(40);
+			dash.setMaxWidth(40);
+			dash.setAlignment(Pos.CENTER);
+			
+			if(game.getTeam1().getName().equals(name))
+			{
+				teamOneName.setText(game.getTeam1().getName());
+				teamOneScore.setText(Integer.toString((int) game.getTeam1Score()));
+				teamTwoName.setText(game.getTeam2().getName());
+				teamTwoScore.setText(Integer.toString((int) game.getTeam2Score()));
+			}
+			else
+			{
+				teamOneName.setText(game.getTeam2().getName());
+				teamOneScore.setText(Integer.toString((int) game.getTeam2Score()));
+				teamTwoName.setText(game.getTeam1().getName());
+				teamTwoScore.setText(Integer.toString((int) game.getTeam1Score()));
+			}
+			
+			
+			HBox line = new HBox();
+			line.getChildren().addAll(teamOneName, teamOneScore, dash, teamTwoScore, teamTwoName);
+			table.getItems().add(line);
+		}
+	}
+	
+	static HBox selected;
+	
+	private static void teamSelected()
+	{
+		if(state == 0)
+		{
+			selected = table.getSelectionModel().getSelectedItem();
+			state = 1;
+		}
+		else if(state == 1)
+		{
+			if(table.getSelectionModel().getSelectedItem() == selected)
+			{
+				
+				GameEdit.display(selected);
+				state = 0;
+			}
+			else
+			{
+				state = 0;
+			}
+		}
 	}
 }
