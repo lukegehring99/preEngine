@@ -16,12 +16,10 @@ public class Window extends Application
 	public static Sport sport;
 
 	
-	
 	public static void main(String[] args) {
 		
-		sport = new Sport("College Division 1 Basketball");
+		sport = new Sport("Default");
 
-		
         launch(args);
     }
 
@@ -134,4 +132,24 @@ public class Window extends Application
 		sport.deleteGame(game);
 	}
 	
+	public static ArrayList<double[]> generateResults(Team team1, Team team2)
+	{
+		return sport.generatePathway(team1, team2);
+	}
+	
+	public static void save(String path)
+	{
+		// clear the file at the location, if no file, continue
+		// save the new file at the specified path with the specified name 
+		DataExport export = new DataExport(path + "\\");
+		export.serializeSport(sport);
+	}
+	
+	public static void load(String path)
+	{
+		DataImport in = new DataImport(path);
+		sport = in.deserialzeSport();
+		
+		// refresh the everything
+	}
 }

@@ -128,5 +128,13 @@ public class Sport implements Serializable{
 		}
 		teams.deleteTeam(team);
 	}
+	
+	
+	public ArrayList<double[]> generatePathway(Team team1, Team team2)
+	{
+		Comparison temp = new Comparison(team1, team2, this);
+		temp.generateResults();
+		return temp.getResults();
+	}
 }
 

@@ -14,22 +14,21 @@
         <menus>
           <Menu mnemonicParsing="false" text="File">
             <items>
-                  <MenuItem mnemonicParsing="false" text="New Sport" />
-              	  <MenuItem mnemonicParsing="false" text="Open" />
-                  <MenuItem mnemonicParsing="false" text="Save" />
-                  <MenuItem mnemonicParsing="false" text="Save As" />
-                  <MenuItem mnemonicParsing="false" text="Settings" />
-                  <MenuItem mnemonicParsing="false" text="Close" />
+                  <MenuItem mnemonicParsing="false" onAction="#newSport" text="New Sport" />
+              	  <MenuItem mnemonicParsing="false" onAction="#open" text="Open" />
+                  <MenuItem mnemonicParsing="false" onAction="#save" text="Save" />
+                  <MenuItem mnemonicParsing="false" onAction="#saveAs" text="Save As" />
+                  <MenuItem mnemonicParsing="false" onAction="#close" text="Close" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Edit">
             <items>
-              <MenuItem mnemonicParsing="false" text="Delete" />
+              <MenuItem mnemonicParsing="false" onAction="#degree" text="Degree" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Help">
             <items>
-              <MenuItem mnemonicParsing="false" text="About" />
+              <MenuItem mnemonicParsing="false" onAction="#about" text="About" />
             </items>
           </Menu>
         </menus>
@@ -75,7 +74,7 @@
    <bottom>
       <HBox style="-fx-background-color: #CED2D5;" BorderPane.alignment="CENTER">
          <children>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Prediction Engine 0.01" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Prediction Engine 0.02" />
             <Region HBox.hgrow="ALWAYS">
                <HBox.margin>
                   <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />

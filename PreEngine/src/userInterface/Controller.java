@@ -1,7 +1,13 @@
 package userInterface;
 
+import java.io.File;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
+
+import javax.swing.JFileChooser;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 import engine.*;
 import javafx.fxml.Initializable;
@@ -23,16 +29,16 @@ public class Controller implements Initializable{
 
 	
 	private int state;
-	private String teamOne;
-	private String teamTwo;
-	//private String fileLocation;
-	
+	private Team teamOne;
+	private Team teamTwo;
+	private String fileLocation;
+	private String name;
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		state = 0;
 		sportLabel.setText(Window.sport.getName());
-		
+		name = Window.sport.getName();
 		
 	}
 	
@@ -73,11 +79,14 @@ public class Controller implements Initializable{
 		teamList.getSelectionModel().clearSelection();
 	}
 	
+	ArrayList<double[]> results;
+	
 	public void computeScore()
 	{
 		if(teamOne != null && teamTwo != null)
 		{
-			
+			results = Window.generateResults(teamOne, teamTwo);
+			printArray(results);
 		}
 		else
 		{
@@ -116,6 +125,7 @@ public class Controller implements Initializable{
 			String temp = teamList.getSelectionModel().getSelectedItem();
 			if(temp != null && !teamTwoLabel.getText().equals(temp))
 			{
+				teamOne = Window.getTeam(temp);
 				teamOneLabel.setText(temp);
 				state = 0;
 			}
@@ -128,6 +138,7 @@ public class Controller implements Initializable{
 			String temp = teamList.getSelectionModel().getSelectedItem();
 			if(temp != null && !teamOneLabel.getText().equals(temp))
 			{
+				teamTwo = Window.getTeam(temp);
 				teamTwoLabel.setText(temp);
 				state = 0;
 			}
@@ -148,6 +159,139 @@ public class Controller implements Initializable{
 		teamList.getItems().addAll(Window.getTeams());
 	}
 	
+	public void saveAs()
+	{
+		//System.out.println("Save as pressed");
+		String path = getFolderPath();
+		fileLocation = path;
+		System.out.println(path);
+		save();
+	}
+	
+	
+	public void save()
+	{
+		if(fileLocation == null)
+		{
+			getFolderPath();
+			Window.save(fileLocation);
+		}
+		else
+		{
+			System.out.println("saving");
+			Window.save(fileLocation);
+		}
+	}
+	
+	public void open()
+	{
+		String path = getFilePath();
+		Window.load(path);
+		initialize(null, null);
+		refreshTeams();
+	}
+	
+	public void newSport()
+	{
+		
+	}
+	
+	public void close()
+	{
+		
+	}
+	
+	public void degree()
+	{
+		
+	}
+	
+	public void about()
+	{
+		
+	}
+	
+	private String getFolderPath()
+	{
+		String path = System.getProperty("user.home") + "\\Documents";
+		
+		try {
+			UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InstantiationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (UnsupportedLookAndFeelException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		JFileChooser f = new JFileChooser(path);
+        f.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY); 
+        f.showSaveDialog(null);
+
+        //System.out.println(f.getSelectedFile());
+		return f.getSelectedFile().getAbsolutePath();
+	}
+	
+	
+	private String getFilePath()
+	{
+		String path = System.getProperty("user.home") + "\\Documents";
+		
+		try {
+			UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InstantiationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (UnsupportedLookAndFeelException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		JFileChooser f = new JFileChooser(path);
+        f.setFileSelectionMode(JFileChooser.FILES_ONLY); 
+        f.showSaveDialog(null);
+
+        //System.out.println(f.getSelectedFile());
+		return f.getSelectedFile().getAbsolutePath();
+
+	}
+	
+	
+	
+	
+	private static void printArray(ArrayList<double[]> temp)
+	{
+		for(int j = 0; j < temp.size(); j++)
+		{
+			double[] array = temp.get(j);
+			System.out.print("[");
+			for(int i = 0; i < array.length; i++)
+			{
+				if(!(i == array.length-1))
+				{
+					System.out.print(array[i] + ", ");
+				}
+				else
+				{
+					System.out.print(array[i]);
+				}
+			}
+			System.out.println("]");
+		}
+	}
 
 
 }

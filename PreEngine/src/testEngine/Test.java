@@ -38,13 +38,18 @@ public class Test {
 		System.out.println(s.getGameField());
 		System.out.println(s.getRoster() + "\n");
 		
-		s.deleteTeam(b);
 		
-		System.out.println(s.getGameField());
-		System.out.println(s.getRoster());
+		Pathway one = new Pathway(a, c, 0, s );
+		double[] resultsOne = one.generatePathway();
+		printArray(resultsOne);
 		
+		Pathway two = new Pathway(a, c, 1, s );
+		double[] resultsTwo = two.generatePathway();
+		printArray(resultsTwo);
 		
-		
+		Pathway three = new Pathway(a, c, 2, s );
+		double[] resultsThree = three.generatePathway();
+		printArray(resultsThree);
 		
 		/*
 		Team d = new Team("D");
