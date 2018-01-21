@@ -23,12 +23,16 @@ public class Window extends Application
         launch(args);
     }
 
+	static Stage window;
+	
     @Override
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("GUI.fxml"));
         primaryStage.setTitle("Prediction Engine");
         primaryStage.setScene(new Scene(root, 950, 600));
         primaryStage.show();
+        window = primaryStage;
+        
     }
     
     public static void addTeam(String name)
@@ -151,5 +155,15 @@ public class Window extends Application
 		sport = in.deserialzeSport();
 		
 		// refresh the everything
+	}
+	
+	public static void reset()
+	{
+		sport = new Sport("Default");
+	}
+	
+	public static void close()
+	{
+		window.close();
 	}
 }

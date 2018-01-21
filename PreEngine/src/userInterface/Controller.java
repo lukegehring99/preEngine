@@ -1,6 +1,5 @@
 package userInterface;
 
-import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -32,13 +31,13 @@ public class Controller implements Initializable{
 	private Team teamOne;
 	private Team teamTwo;
 	private String fileLocation;
-	private String name;
+	//private String name;
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		state = 0;
 		sportLabel.setText(Window.sport.getName());
-		name = Window.sport.getName();
+		//name = Window.sport.getName();
 		
 	}
 	
@@ -165,7 +164,11 @@ public class Controller implements Initializable{
 		String path = getFolderPath();
 		fileLocation = path;
 		System.out.println(path);
-		save();
+		
+		if(fileLocation != null)
+		{
+			Window.save(fileLocation);
+		}
 	}
 	
 	
@@ -173,8 +176,11 @@ public class Controller implements Initializable{
 	{
 		if(fileLocation == null)
 		{
-			getFolderPath();
-			Window.save(fileLocation);
+			fileLocation = getFolderPath();
+			if(fileLocation != null)
+			{
+				Window.save(fileLocation);
+			}
 		}
 		else
 		{
@@ -186,19 +192,26 @@ public class Controller implements Initializable{
 	public void open()
 	{
 		String path = getFilePath();
-		Window.load(path);
-		initialize(null, null);
-		refreshTeams();
+		fileLocation = path;
+		if(fileLocation != null)
+		{
+			Window.load(path);
+			initialize(null, null);
+			refreshTeams();
+		}
 	}
 	
 	public void newSport()
 	{
-		
+		fileLocation = null;
+		Window.reset();
+		initialize(null, null);
+		refreshTeams();
 	}
 	
 	public void close()
 	{
-		
+		Window.close();
 	}
 	
 	public void degree()
@@ -209,6 +222,17 @@ public class Controller implements Initializable{
 	public void about()
 	{
 		
+	}
+	
+	public void rename()
+	{
+		String name = Rename.display();
+		if(name != null)
+		{
+			Window.sport.setName(name);
+			initialize(null, null);
+		}
+
 	}
 	
 	private String getFolderPath()
@@ -236,7 +260,13 @@ public class Controller implements Initializable{
         f.showSaveDialog(null);
 
         //System.out.println(f.getSelectedFile());
-		return f.getSelectedFile().getAbsolutePath();
+        
+        if(f.getSelectedFile() != null)
+        {
+        	return f.getSelectedFile().getAbsolutePath();
+        }
+        
+		return null;
 	}
 	
 	
@@ -265,7 +295,11 @@ public class Controller implements Initializable{
         f.showSaveDialog(null);
 
         //System.out.println(f.getSelectedFile());
-		return f.getSelectedFile().getAbsolutePath();
+        if(f.getSelectedFile() != null)
+        {
+        	return f.getSelectedFile().getAbsolutePath();
+        }
+		return null;
 
 	}
 	
