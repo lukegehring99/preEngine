@@ -136,9 +136,22 @@ public class Window extends Application
 		sport.deleteGame(game);
 	}
 	
-	public static ArrayList<double[]> generateResults(Team team1, Team team2)
+	public static ArrayList<int[]> generateResults(Team team1, Team team2)
 	{
-		return sport.generatePathway(team1, team2);
+		ArrayList<double[]> temp = sport.generatePathway(team1, team2);
+		ArrayList<int[]> values = new ArrayList<int[]>();
+		
+		for(int i = 0; i < temp.size(); i++)
+		{
+			int[] newVals = new int[temp.get(i).length];
+			for(int j = 0; j < temp.get(i).length; j++)
+			{
+				newVals[j] = (int)(temp.get(i)[j] + .5);
+			}
+			values.add(newVals);
+		}
+		
+		return values;
 	}
 	
 	public static void save(String path)
@@ -166,4 +179,6 @@ public class Window extends Application
 	{
 		window.close();
 	}
+	
+
 }

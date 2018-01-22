@@ -10,6 +10,8 @@ import javax.swing.UnsupportedLookAndFeelException;
 
 import engine.*;
 import javafx.fxml.Initializable;
+import javafx.scene.chart.ScatterChart;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.RadioButton;
@@ -24,6 +26,8 @@ public class Controller implements Initializable{
 	public Label teamOneLabel;
 	public Label teamTwoLabel;
 	
+	public ScatterChart<Number, Number> chart;
+	
 	public ListView<String> teamList;
 
 	
@@ -31,13 +35,33 @@ public class Controller implements Initializable{
 	private Team teamOne;
 	private Team teamTwo;
 	private String fileLocation;
-	//private String name;
+	
+	
+	private class Node 
+	{
+		private int frequency;
+		private int value;
+
+		private Node(int frequency, int value) {
+			this.frequency = frequency;
+			this.value = value;
+		}
+	}
+	
 	
 	@Override
-	public void initialize(URL location, ResourceBundle resources) {
+	public void initialize(URL location, ResourceBundle resources) 
+	{
 		state = 0;
 		sportLabel.setText(Window.sport.getName());
-		//name = Window.sport.getName();
+		chart.getXAxis().setLabel("Score Difference");
+		chart.getYAxis().setLabel("Frequency");
+		
+		chart.getXAxis().setTickLength(1);
+		chart.getYAxis().setTickLength(1);
+		
+		
+		
 		
 	}
 	
@@ -78,19 +102,72 @@ public class Controller implements Initializable{
 		teamList.getSelectionModel().clearSelection();
 	}
 	
-	ArrayList<double[]> results;
+	ArrayList<int[]> results;
 	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public void computeScore()
 	{
 		if(teamOne != null && teamTwo != null)
 		{
 			results = Window.generateResults(teamOne, teamTwo);
 			printArray(results);
+			chart.setTitle(teamOne.getName() + " vs " + teamTwo.getName());
+			
+			
+			ArrayList<ArrayList<Node>> values = new ArrayList<ArrayList<Node>>();
+			for(int[] list : results)
+			{
+				values.add(arrayToDistribution(list));
+			}
+			
+			int maxFreq = 0;
+			int maxValue = 0;
+			int minValue = 0;
+			
+			for(ArrayList<Node> temp : values)
+			{
+				Node max = getMaxValue(temp);
+				Node min = getMinValue(temp);
+				
+				if(maxFreq < max.frequency)
+				{
+					maxFreq = max.frequency;
+				}
+				
+				if(maxValue < max.value)
+				{
+					maxValue = max.value;
+				}
+				
+				if(minValue > min.value)
+				{
+					minValue = min.value;
+				}
+			}
+			
+			
+			int counter = 0;
+			
+			for(ArrayList<Node> level : values)
+			{
+				XYChart.Series series = new XYChart.Series();
+				series.setName("Level " + Integer.toString(counter));
+				counter++;
+				
+				for(Node node : level)
+				{
+					series.getData().add(new XYChart.Data(node.value, node.frequency));
+					chart.getData().add(series);
+				}
+			}
+			
+			
 		}
 		else
 		{
 			System.out.println("Team can't be null");
 		}
+		System.out.println("Finished");
 		
 	}
 	
@@ -216,12 +293,12 @@ public class Controller implements Initializable{
 	
 	public void degree()
 	{
-		
+		DegreeEdit.display();
 	}
 	
 	public void about()
 	{
-		
+		About.display();
 	}
 	
 	public void rename()
@@ -306,11 +383,11 @@ public class Controller implements Initializable{
 	
 	
 	
-	private static void printArray(ArrayList<double[]> temp)
+	private static void printArray(ArrayList<int[]> temp)
 	{
 		for(int j = 0; j < temp.size(); j++)
 		{
-			double[] array = temp.get(j);
+			int[] array = temp.get(j);
 			System.out.print("[");
 			for(int i = 0; i < array.length; i++)
 			{
@@ -328,4 +405,69 @@ public class Controller implements Initializable{
 	}
 
 
+	private ArrayList<Node> arrayToDistribution(int[] scores) {
+		ArrayList<Node> distribution = new ArrayList<Node>();
+
+		boolean isAdded = false;
+		
+		for (int i = 0; i < scores.length; i++) 
+		{
+			isAdded = false;
+			for (int j = 0; j < distribution.size(); j++) 
+			{
+				if (scores[i] == distribution.get(j).value) 
+				{
+					distribution.get(j).frequency += 1;
+					isAdded = true;
+				}
+			}
+			if(!isAdded)
+			{
+				distribution.add(new Node(1, scores[i]));
+			}
+		}
+
+		return distribution;
+	}
+	
+	private Node getMaxValue(ArrayList<Node> values)
+	{
+		int maxFreq = 0;
+		int maxValue = 0;
+		
+		for(Node node : values)
+		{
+			if(node.frequency > maxFreq)
+			{
+				maxFreq = node.frequency;
+			}
+			if(node.value > maxValue)
+			{
+				maxValue = node.value;
+			}
+		}
+		
+		return new Node(maxFreq, maxValue);
+	}
+	
+	private Node getMinValue(ArrayList<Node> values)
+	{
+		int minFreq = 0;
+		int minValue = 0;
+		
+		for(Node node : values)
+		{
+			if(node.frequency < minFreq)
+			{
+				minFreq = node.frequency;
+			}
+			if(node.value < minValue)
+			{
+				minValue = node.value;
+			}
+		}
+		
+		return new Node(minFreq, minValue);
+	}
+	
 }

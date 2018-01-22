@@ -75,7 +75,7 @@
    <bottom>
       <HBox style="-fx-background-color: #CED2D5;" BorderPane.alignment="CENTER">
          <children>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Prediction Engine 0.02" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Beta Prediction Engine 1.0" />
             <Region HBox.hgrow="ALWAYS">
                <HBox.margin>
                   <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
@@ -114,14 +114,14 @@
                      </font>
                   </Label>
                </children></HBox>
-            <BarChart prefHeight="515.0" prefWidth="690.0">
+            <ScatterChart fx:id="chart" prefHeight="503.0" prefWidth="690.0">
               <xAxis>
-                <CategoryAxis side="BOTTOM" />
+                <NumberAxis side="BOTTOM" />
               </xAxis>
               <yAxis>
                 <NumberAxis side="LEFT" />
               </yAxis>
-            </BarChart>
+            </ScatterChart>
          </children>
       </VBox>
    </center>
